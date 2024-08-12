@@ -20,7 +20,7 @@ function(properties, context) {
     // if the value doesn't contain rootDomain, then add it front
     if (!valueToBePushed.includes(rootDomain)) {
       if(valueToBePushed.includes('.')){
-        continue;
+        continue; 
       }
 
       valueToBePushed = rootDomain + valueToBePushed;
@@ -30,8 +30,8 @@ function(properties, context) {
     // remove suffix
     valueToBePushed = valueToBePushed.replace('//', '').replace('https:', '').replace('http:');
 
-    // if the value doesn't contain ".", then push it
-    if (!valueToBePushed.split(rootDomain)[1].includes('.') && !valueToBePushed.includes('mailto')) {
+    // if the value doesn't contain ".", and doesn't include "mailto", and doesn't include "#" and we are sure about it's from root URL, then push it
+    if (!valueToBePushed.split(rootDomain)[1].includes('.') && !valueToBePushed.includes('mailto') && !valueToBePushed.includes('#') && valueToBePushed.split('/')[0].includes(rootDomain)) {
       hrefValues.push(valueToBePushed);
     }
 
